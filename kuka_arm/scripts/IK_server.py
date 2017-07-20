@@ -191,16 +191,10 @@ def handle_calculate_IK(req):
             theta6 = atan2(r22, r21)
             if math.isnan(theta4):
                 theta4 = 0
-            else:
-                theta4 = theta4.evalf()
             if math.isnan(theta5):
                 theta5 = 0
-            else:
-                theta5 = theta5.evalf()
             if math.isnan(theta6):
                 theta6 = 0
-            else:
-                theta6 = theta6.evalf()
             print theta4, theta5, theta6
 
             # Populate response for the IK request
