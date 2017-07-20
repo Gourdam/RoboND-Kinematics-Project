@@ -185,6 +185,7 @@ def handle_calculate_IK(req):
 
             # Get R3_6
             R3_6 = Transpose(R0_3) * R0_6
+            R3_6 = R3_6 * R_corr.inv()
 
             r23 = R3_6[1, 2]
             r33 = R3_6[2, 2]
