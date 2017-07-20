@@ -173,6 +173,10 @@ def handle_calculate_IK(req):
 
             # Get R0_6/Rrpy
             R0_6 = get_R0_6(roll, pitch, yaw)
+            R0_6 = R0_6.row_join(Matrix([[x],
+                             [y],
+                             [z]]))
+            R0_6 = R0_6.col_join(Matrix([[0, 0, 0, 1]]))
 
             # Get R0_3
             R0_3 = (T0_1 * T1_2 * T2_3).evalf(subs={q1: theta1, q2: theta2, q3: theta3})
