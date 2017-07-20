@@ -173,9 +173,9 @@ def handle_calculate_IK(req):
 
             # Get R0_6/Rrpy
             R0_6 = get_R0_6(roll, pitch, yaw)
-            R0_6 = R0_6.row_join(Matrix([[x],
-                             [y],
-                             [z]]))
+            R0_6 = R0_6.row_join(Matrix([[px],
+                                         [py],
+                                         [pz]]))
             R0_6 = R0_6.col_join(Matrix([[0, 0, 0, 1]]))
 
             # Get R0_3
