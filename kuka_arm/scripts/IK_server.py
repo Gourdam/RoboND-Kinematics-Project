@@ -60,7 +60,7 @@ def handle_calculate_IK(req):
 
 
             # Joint angle symbols
-            theta1, theta2, theta3, theta4, theta5, theta6 = symbols('theta1:theta7')
+            theta1, theta2, theta3, theta4, theta5, theta6 = symbols('theta1:7')
 
 
             # Modified DH params
