@@ -178,7 +178,7 @@ def handle_calculate_IK(req):
                                          [py],
                                          [pz]]))
             R0_6 = R0_6.col_join(Matrix([[0, 0, 0, 1]]))
-            R0_6 = R0_6 * R_corr.inv()
+            R0_6 = R0_6
 
             # Get R0_3
             R0_3 = (T0_1 * T1_2 * T2_3).evalf(subs={q1: theta1, q2: theta2, q3: theta3})
@@ -190,7 +190,6 @@ def handle_calculate_IK(req):
             R3_6_converted = matrix2numpy(R3_6)
 
             theta4, theta5, theta6 = tf.transformations.euler_from_matrix(R3_6_converted)
-            theta4 -= pi
             print theta4, theta5, theta6
 
             # r23 = R3_6[1, 2]
