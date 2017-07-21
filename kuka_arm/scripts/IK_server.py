@@ -178,7 +178,7 @@ def handle_calculate_IK(req):
                                          [py],
                                          [pz]]))
             R0_6 = R0_6.col_join(Matrix([[0, 0, 0, 1]]))
-            R0_6 = R0_6 * R_corr.inv() * R_z.evalf(subs={q1: -pi/2})
+            R0_6 = R0_6 * R_corr.inv()
 
             # Get R0_3
             R0_3 = (T0_1 * T1_2 * T2_3).evalf(subs={q1: theta1, q2: theta2, q3: theta3})
