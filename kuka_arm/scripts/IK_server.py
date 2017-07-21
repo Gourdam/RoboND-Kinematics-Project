@@ -185,24 +185,27 @@ def handle_calculate_IK(req):
 
             # Get R3_6
             R3_6 = Transpose(R0_3) * R0_6
-            R3_6 = R3_6 * R_corr.inv() * R_y.evalf(subs={q1: pi/2}) * R_x.evalf(subs={q1: pi})
+            R3_6 = R3_6 * R_corr.inv() * R_y.evalf(subs={q1: pi/2})
 
-            r23 = R3_6[1, 2]
-            r33 = R3_6[2, 2]
-            theta4 = -atan2(r33, r23)
-
-            theta5 = acos(r23)
-
-            r21 = R3_6[1, 0]
-            r22 = R3_6[1, 1]
-            theta6 = atan2(r22, r21)
-            if math.isnan(theta4):
-                theta4 = 0
-            if math.isnan(theta5):
-                theta5 = 0
-            if math.isnan(theta6):
-                theta6 = 0
+            theta4, theta5, theta6 = tf.transformations.euler_from_matrix(R3_6, 'rzyz')
             print theta4, theta5, theta6
+
+            # r23 = R3_6[1, 2]
+            # r33 = R3_6[2, 2]
+            # theta4 = -atan2(r33, r23)
+            #
+            # theta5 = acos(r23)
+            #
+            # r21 = R3_6[1, 0]
+            # r22 = R3_6[1, 1]
+            # theta6 = atan2(r22, r21)
+            # if math.isnan(theta4):
+            #     theta4 = 0
+            # if math.isnan(theta5):
+            #     theta5 = 0
+            # if math.isnan(theta6):
+            #     theta6 = 0
+            # print theta4, theta5, theta6
 
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
