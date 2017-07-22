@@ -185,12 +185,9 @@ def handle_calculate_IK(req):
 
             # Get R3_6
             R3_6 = Transpose(R0_3) * R0_6
-            R3_6 = R3_6 * R_corr.inv() * R_z.evalf(subs={q1: -pi/2}) #* R_y.evalf(subs={q1: -pi/2})
+            R3_6 = R3_6 * R_corr.inv() * R_x.evalf(subs={q1: -pi/2}) #* R_y.evalf(subs={q1: -pi/2})
 
             R3_6_converted = matrix2numpy(R3_6)
-
-            theta4 += 2*pi
-            theta6 +- pi
 
             theta4, theta5, theta6 = tf.transformations.euler_from_matrix(R3_6_converted)
             print theta4, theta5, theta6
