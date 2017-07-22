@@ -190,17 +190,23 @@ def handle_calculate_IK(req):
             R3_6_converted = matrix2numpy(R3_6)
 
             theta4, theta5, theta6 = tf.transformations.euler_from_matrix(R3_6_converted, 'rzyz')
-            # theta4 += pi
-            # if theta4 > 2*pi:
-            #     theta4 -= 2*pi
-            # elif theta4 < -2*pi:
-            #     theta4 += 2*pi
+            theta4 += pi
+            if theta4 > 2*pi:
+                theta4 -= 2*pi
+            elif theta4 < -2*pi:
+                theta4 += 2*pi
 
-            theta5 -= pi/2
-            if theta5 > 2*pi:
-                theta5 -= 2*pi
-            elif theta5 < -2*pi:
-                theta5 += 2*pi
+            # theta5 -= pi/2
+            # if theta5 > 2*pi:
+            #     theta5 -= 2*pi
+            # elif theta5 < -2*pi:
+            #     theta5 += 2*pi
+
+            theta6 += pi
+            if theta6 > 2*pi:
+                theta6 -= 2*pi
+            elif theta6 < -2*pi:
+                theta6 += 2*pipi
             print theta4, theta5, theta6
 
             # r23 = R3_6[1, 2]
