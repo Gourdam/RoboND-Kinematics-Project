@@ -185,7 +185,7 @@ def handle_calculate_IK(req):
 
             # Get R3_6
             R3_6 = Transpose(R0_3) * R0_6
-            R3_6 = R3_6 * R_y.evalf(subs={q1: -pi/2}) * R_z.evalf(subs={q1: -pi/2}) * R_y.evalf(subs={q1: -pi/2})
+            R3_6 = R3_6 * R_y.evalf(subs={q1: -pi/2}) * R_z.evalf(subs={q1: -pi/2}) * R_y.evalf(subs={q1: pi/2})
 
             R3_6_converted = matrix2numpy(R3_6)
 
