@@ -196,7 +196,7 @@ def handle_calculate_IK(req):
             elif theta4 < -2*pi:
                 theta4 += 2*pi
 
-            theta5 -= pi/2
+            theta5 += pi/2
             if theta5 > 2*pi:
                 theta5 -= 2*pi
             elif theta5 < -2*pi:
