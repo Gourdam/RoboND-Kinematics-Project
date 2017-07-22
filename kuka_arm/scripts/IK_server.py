@@ -196,11 +196,11 @@ def handle_calculate_IK(req):
             elif theta4 < -2*pi:
                 theta4 += 2*pi
 
-            theta5 += pi/2
-            if theta5 > 2*pi:
-                theta5 -= 2*pi
-            elif theta5 < -2*pi:
-                theta5 += 2*pi
+            # theta5 += pi/2
+            # if theta5 > 2*pi:
+            #     theta5 -= 2*pi
+            # elif theta5 < -2*pi:
+            #     theta5 += 2*pi
             # print theta4, theta5, theta6
 
             # r23 = R3_6[1, 2]
