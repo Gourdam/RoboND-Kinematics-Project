@@ -5,7 +5,8 @@
 # Kinematic Analysis
 ## 1. DH Paramaters
 The DH Parameter table was created with a combination of the lessons provided and manual testing. Using the DH paramater table derived in lesson P-12 as a starting point, I used a Jupyter notebook to verify and check all my DH paramaters. The notebook can be viewed `kuka_arm/notebooks/FK_Testing.ipynb`. The final DH parameters table is the following:
-**i**|**alpha**i-1|**a**i-0|**d**i|**theta**i
+
+i|alphai-1|ai-0|di|thetai
 ---|---|---|---|---
  1|0|0|0.75|theta1
  2|-pi/2|0.35|0|theta2+pi/2
