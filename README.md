@@ -5,15 +5,15 @@
 # Kinematic Analysis
 ## 1. DH Paramaters
 The DH Parameter table was created with a combination of the lessons provided and manual testing. Using the DH paramater table derived in lesson P-12 as a starting point, I used a Jupyter notebook to verify and check all my DH paramaters. The notebook can be viewed `kuka_arm/notebooks/FK_Testing.ipynb`. The final DH parameters table is the following:
-|**i**|**alpha**i-1|**a**i-0|**d**i|**theta**i|
-|---|---|---|---|---|
-| 1|0|0|0.75|theta1|
-| 2|-pi/2|0.35|0|theta2+pi/2|
-| 3|0|1.25|0|theta3|
-| 4|-pi/2|-0.054|1.50| theta4|
-| 5|pi/2|0|0|theta5|
-| 6|-pi/2|0|0|theta6|
-| G|0|0|0.303|0
+**i**|**alpha**i-1|**a**i-0|**d**i|**theta**i
+---|---|---|---|---
+ 1|0|0|0.75|theta1
+ 2|-pi/2|0.35|0|theta2+pi/2
+ 3|0|1.25|0|theta3
+ 4|-pi/2|-0.054|1.50| theta4
+ 5|pi/2|0|0|theta5
+ 6|-pi/2|0|0|theta6
+ G|0|0|0.303|0
 **Note**: 7th row is the gripper
 The following picture shows where all the DH parameters are located
 ![alt text][image1]
