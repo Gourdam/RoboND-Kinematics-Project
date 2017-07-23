@@ -1,6 +1,6 @@
 [image1]: ./pictures/dh_params.jpg
 [image2]: ./pictures/robot_angles.jpg
-[image3]: ./pictures/successful_8_out_of_10.png
+[image3]: ./pictures/successful_8_out-of_10.png
 
 # Kinematic Analysis
 ## 1. DH Paramaters

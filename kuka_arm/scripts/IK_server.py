@@ -19,7 +19,7 @@ from mpmath import *
 from sympy import *
 import math
 
-
+# Gets wrist center based on the gripper arm place and orientation
 def find_wrist_center(px, py, pz, roll, pitch, yaw):
     end_effector_length = 0.303
     wx = px - (end_effector_length) * 1.0 * cos(yaw) * cos(pitch)
@@ -27,6 +27,7 @@ def find_wrist_center(px, py, pz, roll, pitch, yaw):
     wz = pz - (end_effector_length) * -1.0 * sin(pitch)
     return wx, wy, wz
 
+# Gets the R0_6 3x3 rotation matrix based on the orientation of the gripper arm
 def get_R0_6(alpha, beta, gamma):
     r11 = cos(alpha) * cos(beta)
     r12 = (cos(alpha)* sin(beta) * sin(gamma)) - (sin(alpha)*cos(gamma))
@@ -126,21 +127,31 @@ def handle_calculate_IK(req):
 
             # Calculate joint angles using Geometric IK method
 
+            # Get wrist location in x, y, and z
             wx, wy, wz = find_wrist_center(px, py, pz, roll, pitch, yaw)
 
+
+            # Finding theta1
+            # theta1
             theta1 = atan2(wy, wx)
 
+            # Declare variables based on diagram to calculate theta2 and theta3
             s1 = sqrt(wx*wx + wy*wy) - dh[a1]
             s2 = wz - dh[d1]
             s3 = sqrt(s1*s1 + s2*s2)
             s4 = sqrt(dh[a3]*dh[a3] + dh[d4]*dh[d4])
 
+
+            # Finding theta2
+            # Initial variables based on initial configuration
+            # Intiial location of wrist
             wx0, wy0, wz0 = 1.85, 0, 1.947
             s1_initial = sqrt(wx0*wx0 + wy0*wy0) - dh[a1]
             s2_initial = wz0 - dh[d1]
             s3_initial = sqrt(s1_initial*s1_initial + s2_initial*s2_initial)
             s4_initial = s4
 
+            # Find beta angles using atan2
             beta1_initial = atan2(s2_initial, s1_initial)
             beta2_d_initial = (dh[a2]*dh[a2] + s3_initial*s3_initial - s4_initial*s4_initial) / (2.0*dh[a2]*s3_initial)
             beta2_initial = atan2(sqrt(1 - beta2_d_initial*beta2_d_initial), beta2_d_initial)
@@ -149,14 +160,9 @@ def handle_calculate_IK(req):
             beta2_d = (dh[a2]*dh[a2] + s3*s3 - s4*s4) / (2*dh[a2]*s3)
             beta2 = atan2(sqrt(1 - beta2_d*beta2_d), beta2_d)
 
-            print s1, s2, s3, s4
-            print(beta1)
-            print(beta2)
-
             # theta2
-            print(beta1_initial, beta2_initial)
-            print(beta1, beta2)
             theta2 = (beta1_initial + beta2_initial) - (beta1 + beta2)
+
 
             # Finding theta3
             # beta3_intiial
@@ -185,46 +191,28 @@ def handle_calculate_IK(req):
 
             # Get R3_6
             R3_6 = Transpose(R0_3) * R0_6
+            # Apply correction matrices to get R3_6 in correct position
             R3_6 = R3_6 * R_corr.inv() * R_x.evalf(subs={q1: pi/2})
 
             R3_6_converted = matrix2numpy(R3_6)
 
+            # Use transform function to get the associated theta values
             theta4, theta5, theta6 = tf.transformations.euler_from_matrix(R3_6_converted, 'rzyz')
+
+            # Fix position of theta4 based on testing
             theta4 += pi
             if theta4 > 2*pi:
                 theta4 -= 2*pi
             elif theta4 < -2*pi:
                 theta4 += 2*pi
 
-            # theta5 -= pi/2
-            # if theta5 > 2*pi:
-            #     theta5 -= 2*pi
-            # elif theta5 < -2*pi:
-            #     theta5 += 2*pi
-
+            # Fix position of theta6 based on testing
             theta6 += pi
             if theta6 > 2*pi:
                 theta6 -= 2*pi
             elif theta6 < -2*pi:
                 theta6 += 2*pipi
             print theta4, theta5, theta6
-
-            # r23 = R3_6[1, 2]
-            # r33 = R3_6[2, 2]
-            # theta4 = -atan2(r33, r23)
-            #
-            # theta5 = acos(r23)
-            #
-            # r21 = R3_6[1, 0]
-            # r22 = R3_6[1, 1]
-            # theta6 = atan2(r22, r21)
-            # if math.isnan(theta4):
-            #     theta4 = 0
-            # if math.isnan(theta5):
-            #     theta5 = 0
-            # if math.isnan(theta6):
-            #     theta6 = 0
-            # print theta4, theta5, theta6
 
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
