@@ -1,12 +1,12 @@
-[image1]: ./images/dh_params.jpg
-[image2]: ./images/robot_angles.jpg
-[image3]: ./images/successful_8_out_of_10.png
+[image1]: ./pictures/dh_params.jpg
+[image2]: ./pictures/robot_angles.jpg
+[image3]: ./pictures/successful_8_out_of_10.png
 
 # Kinematic Analysis
 ## 1. DH Paramaters
 The DH Parameter table was created with a combination of the lessons provided and manual testing. Using the DH paramater table derived in lesson P-12 as a starting point, I used a Jupyter notebook to verify and check all my DH paramaters. The notebook can be viewed `kuka_arm/notebooks/FK_Testing.ipynb`. The final DH parameters table is the following:
 |**i**|**alpha**i-1|**a**i-0|**d**i|**theta**i|
-|:----|:----------:|:------:|:----:|---------:|
+|---|---|---|---|---|
 | 1|0|0|0.75|theta1|
 | 2|-pi/2|0.35|0|theta2+pi/2|
 | 3|0|1.25|0|theta3|
