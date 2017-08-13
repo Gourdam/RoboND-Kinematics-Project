@@ -15,6 +15,8 @@ i|alphai-1|ai-0|di|thetai
  5|pi/2|0|0|theta5
  6|-pi/2|0|0|theta6
  G|0|0|0.303|0
+ 
+ 
 **Note**: 7th row is the gripper
 The following picture shows where all the DH parameters are located
 ![alt text][image1]
